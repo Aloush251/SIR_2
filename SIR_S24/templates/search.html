@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بحث عن سؤال</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .highlight {
+            color: red; /* يمكنك تغيير اللون هنا */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>البحث عن سؤال</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="query">أدخل السؤال:</label>
+                <input type="text" id="query" name="query" class="form-control" value="{{ request.form['query'] }}" required>
+            </div>
+            <div class="form-group">
+                <label>اختر خوارزمية الاسترجاع:</label><br>
+                <select name="algorithm" class="form-control">
+                    <option value="Boolean">النموذج البولياني</option>
+                    <option value="Extended Boolean">النموذج البولياني الموسع</option>
+                    <option value="Vector Space">النموذج الشعاعي</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">بحث</button>
+        </form>
+
+        <div class="mt-4">
+            {% if results %}
+                <h4>النتائج:</h4>
+                <ul class="list-group">
+                    {% for result in results %}
+                        <li class="list-group-item">
+                            <strong>{{ result['question'] | replace(request.form['query'], '<span class="highlight">' + request.form['query'] + '</span>', True) | safe }}</strong>: 
+                            {{ result['answer'] | replace(request.form['query'], '<span class="highlight">' + request.form['query'] + '</span>', True) | safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

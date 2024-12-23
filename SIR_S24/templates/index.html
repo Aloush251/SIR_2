@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدخال الأسئلة والأجوبة</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>إدخال سؤال وجواب</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="question">السؤال:</label>
+                <input type="text" id="question" name="question" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="answer">الإجابة:</label>
+                <textarea id="answer" name="answer" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">إضافة</button>
+            <a href="{{ url_for('search') }}" class="btn btn-secondary">البحث عن سؤال</a>
+        </form>
+    </div>
+</body>
+</html>
